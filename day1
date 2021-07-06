@@ -1,4 +1,68 @@
-1.输出 #语句无需分号结尾
-  print("day1") 打印字符串
-  print(123) 打印
+1.输出 #语句无需分号结尾，打印函数自动换行
+  print("day1") #打印字符串
+  print(123) #打印整数
+  输出默认在尾部加换行符
   
+  print("day1",end=" ") #end值为结尾符号
+  print("study,end=" ")
+  输出结果：
+  day1study
+  
+  print("day1",end=",") #逗号分割
+  print("study,end=" ")
+  输出结果：
+  day1,study
+  
+  print("day1","day2") #输出为同一行
+    输出结果：
+    day1 day2
+  
+  2.数据类型
+  python解释器自动识别
+  
+    2.1整形
+    print(666)
+    print(2 + 10)
+    print(10 % 3)
+    
+    2.2字符串（str）
+      2.2.1单行字符串
+        print("我是alex")
+        
+      2.2.2多行字符串
+        print（"""我是alex
+        我是alex
+        我是alex
+        我是alex"""）
+        
+        输出结果：
+        我是alex
+        我是alex
+        我是alex
+        我是alex
+        
+        2.2.2字符串加、乘
+        print("alex" + "是我")
+        输出结果：
+        alex是我
+        
+        print(3 * "alex")
+        输出结果：
+        alexalexalex      
+        
+     2.3布尔类型（bool）
+     ture/false
+     print(false)或者
+     print(1>2) #输出结果：false
+     
+     print（ture）
+     print(1==1) #输出结果： ture
+     
+     name = input("输出用户名")
+     
+     if name="alex"：
+      print("ture")
+     else：
+     print("false")
+     
+     
