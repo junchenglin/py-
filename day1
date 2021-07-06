@@ -17,7 +17,7 @@
     输出结果：
     day1 day2
   
-  2.数据类型
+2.数据类型
   python解释器自动识别
   
     2.1整形
@@ -65,4 +65,143 @@
      else：
      print("false")
      
+     2.4类型转换
+     str(666)="666",转换为字符型“666”，int("888")=888,将字符串转换成字数型888.
      
+       2.4.1字符串转换为整形
+         int("666")
+         int("999")
+
+         "6"+"9"结果为“69” 
+         int("6")+int("9")结果为15
+         
+        2.4.2布尔转换为整形
+         int(ture)转换为1
+        
+        2.4.3转换为字符串
+        str(345)转换为“345”
+        
+        str(ture)转换为 “ture”
+        
+        2.4.4转换为布尔
+        bool(1) ture
+        bool(2) ture
+        bool(" ") ture
+        bool("sad") ture
+        bool("") false
+        除了0、空字符串其余都为真
+        
+ 3.变量
+   【变量名=值】
+       age=18
+       name="alex"
+       flag=1>18
+       addr="广东"+"广州"+name
+       print(flag)
+       print(addr)
+       
+      3.1变量名规范
+      字母、下划线、数字组成
+      不以数字开头以及python的关键字
+    
+  4.注释
+   单行注释 以#开头
+   #声明一个变量
+   name="alex"
+   
+   多行注释格式
+   
+   """
+   多行注释
+   多行注释
+   """
+   
+5.输入
+   name = input("输入姓名")
+   
+   if name="alex":
+    print("登陆成功")
+   else：
+   print("登录失败")
+   
+   ****：均为字符串，输入数字也为字符串形式
+   
+   name = input("请输入用户名")
+   text = name + "逆天"
+   print(text)
+   
+  6.条件语句
+   条件语句成立后，需要执行语句要加tab 
+   num=5
+   if num>3 and num<10:    #and代替c中的&&关系，if语句不需要括号，语句后面加: 
+     print("y")
+   else:
+     print("n")
+   
+   ***注意: and = &&; or = ||   
+   
+   num=19
+   data = num %2 ==1 
+   if data:
+   else:
+   
+   if 5==5:
+      print("5=5")
+   print("结束") #不相等打印结束
+   
+   #输入用户名和密码
+   user = input("输入密码")
+   pwd = input("请输入密码")
+   if user=="linjuncheng" and pwd == "12345" :
+        print("登录成功")
+   else ：
+        print（"失败"）
+        
+   #判断输入数字
+   num = input("输入数字")
+   if int(num) > 10 :
+        print("大于10")
+    else:
+        print("小于或者大于10")
+    
+        6.1条件嵌套
+        python多语句不需要{}，
+        
+        if 条件：
+        elif 条件：
+        else ：
+        
+    7.循环语句
+        while 条件:
+           ...
+           ...
+           ...
+        print("结束")
+     
+     print("开始")
+     while True
+        print("循环") #执行语句要加tab
+     print("结束")
+     
+     
+     flag = True
+     while flag :
+      user= input("输入用户名")
+      pwd = input("输入密码")
+      if user == "alex" and pwd == "12345" :
+        flag=False
+        print("登陆成功")
+      else:
+        print("输入错误")
+     print("结束")
+     
+     flag = True
+     while flag ：
+      num= input("输入数字")
+      if int(num) > 66 :
+        print("比数字大")
+      elif int(num) < 66 :
+        print("比数字小")
+      else ：
+        print("输入正确")
+     print("结束")
