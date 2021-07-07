@@ -13,5 +13,346 @@
   age = 18 
   text = "我叫%s,今年%d岁" %(name,age)
   
-  message = 
+ 
+message = "%(name)s你什么时候过来呀？%(user)s今天不在呀。" % {"name": "死鬼", "user": "李杰"}
+print(message)
+
+
+2.1.2 百分比
+
+text = "兄弟，这个片我已经下载了90%了，居然特么的断网了"
+print(text)
+
+text = "%s，这个片我已经下载了90%%了，居然特么的断网了" %"兄弟"
+print(text)
+# 输出：
+兄弟，这个片我已经下载了90%了，居然特么的断网了
+
+****：一旦字符串格式化中存现百分比的显示，请一定要呀加 %% 以实现输出 %。
+
+
+
+2.2 format（推荐）
+
+
+text = "我叫{0}，今年18岁".format("武沛齐")
+
+text = "我叫{0}，今年{1}岁".format("武沛齐",18)
+
+text = "我叫{0}，今年{1}岁，真是的姓名是{0}。".format("武沛齐",18)
+
+
+
+text = "我叫{}，今年18岁".format("武沛齐")
+
+text = "我叫{}，今年{}岁".format("武沛齐",18)
+
+text = "我叫{}，今年{}岁，真是的姓名是{}。".format("武沛齐",18,"武沛齐")
+
+
+
+text = "我叫{n1}，今年18岁".format(n1="武沛齐")
+
+text = "我叫{n1}，今年{age}岁".format(n1="武沛齐",age=18)
+
+text = "我叫{n1}，今年{age}岁，真是的姓名是{n1}。".format(n1="武沛齐",age=18)
+
+
+
+text = "我叫{0}，今年{1}岁"
+data1 = text.format("武沛齐",666)
+data2 = text.format("alex",73)
+
+
+text = "我叫%s，今年%d岁"
+data1 = text %("武沛齐",20)
+data2 = text %("alex",84)
+
+
+
+2.3 f
+
+到Python3.6版本，更便捷。
+
+text = f"我喜欢{'跑步'}，"
+
+action = "跑步"
+text = f"我喜欢{action}，"
+
+name = "喵喵"
+age = 19
+text = f"我的名字叫{name}，今年{age}岁"
+print(text)
+
+text = f"我的名字叫喵喵，今年{19 + 2}岁"
+print(text)
+
+
+# 在Python3.8引入
+text = f"嫂子的名字叫喵喵，今年{19 + 2=}岁"
+print(text)
+
+
+```python
+# 进制转换
+v1 = f"我今年{22}岁"
+print(v1)
+
+v2 = f"我今年{22:#b}岁" #二进制
+print(v2)
+
+v3 = f"我今年{22:#o}岁" #八进制
+print(v3)
+
+v4 = f"我今年{22:#x}岁" #十六进制
+print(v4)
+
+
+
+# 理解
+text = f"我是{'alex'}，我爱大铁锤"
+
+name = "alex"
+text = f"我是{name}，我爱大铁锤"
+
+name = "alex"
+text = f"我是{ name.upper() }，我爱大铁锤"
+
+# 输出：我是ALEX，我爱大铁锤
+
+
+
+
+3. 运算符
+
+提到运算符，我想大家首先想到的就是加、减、乘、除之类， 本节要系统的跟大家来聊一聊，我们写代码时常见的运算符可以分为5种：
+- 算数运算符，例如：加减乘除
   
+  print( 9//2 )
+  
+- 比较运算符，例如：大于、小于
+
+  
+
+ 
+
+  if 1 >2:
+    pass
+  while 1>2:
+    pass
+  
+  data = 1 == 2
+  
+- 赋值运算，例如：变量赋值
+
+
+  ```python
+  num = 1
+  while num < 100:
+    print(num)
+    # num = num + 1
+    num += 1
+  ```
+
+- 成员运算，例如：是否包含 （in/ not in）
+
+  v1 = "le" in "alex"  # True/False
+  # 让用户输入一段文本，检测文本中是否包含敏感词。
+  text = input("请输入内容：")
+  if "alex" in text:
+    print("含有关键词")
+  else:
+    print(text)
+  ```
+
+- 逻辑运算，例如：且或非
+
+  if username == "alex" and pwd == "123":
+    pass
+  
+  data = 1 > 2
+  if not data:
+    pass
+
+  
+
+### 3.1 运算符优先级
+
+运算符的优先级有很多，常见的没几个，推荐你记住3个即可：
+
+- 算数优先级优先级 大于 比较运算符
+
+  ```python
+  if 2 + 10 > 11:
+  	print("真")
+  else:
+  	print("假")
+  ```
+
+- 比较运算符优先级 大于 逻辑运算符
+
+  if 1>2 and 2<10:
+  	print("成立")
+  else:
+  	print("不成立")
+
+
+- 逻辑运算符内部三个优先级 not > and > or
+
+
+  if not 1 and 1>2 or 3 == 8:
+  	print("真")
+  else:
+  	print("假")
+
+
+上述这3个优先级从高到低总结：`加减乘除 > 比较 > not and or `。绝招：加括号。
+
+
+
+
+
+### 3.2 面试题
+
+逻辑运算中：and  or
+
+
+v1 = name == "alex" and pwd == "123"
+# v1 = True and False
+
+if name == "alex" and pwd == "123":
+  pass
+
+
+
+
+
+v2 = "wupeiqi" and "alex"
+
+# 第一步：将and前后的只转换为布尔值 True and True
+# 第二步：判断本次操作取悦于谁？由于前面的是True，所以本次逻辑判断取决于后面的值。
+# 所以，后面的只等于多少最终结果就是多少。 v2 = "alex"
+
+
+v3 = "" and "alex"
+# 第一步：将and前后的只转换为布尔值 False and True
+# 第二步：判断本次操作取悦于谁？由于前面的是False，所以本次逻辑判断取决于前面的值。
+# 所以，前面的只等于多少最终结果就是多少。 v2 = ""
+
+v4 = 1 or 8 
+# 第一步：将and前后的只转换为布尔值 True or True
+# 第二步：判断本次操作取悦于谁？由于前面的是True，所以本次逻辑判断取决于前面的值。
+# v4 = 1
+
+v5 = 0 or 8 
+# 第一步：将and前后的只转换为布尔值 False or True
+# 第二步：判断本次操作取悦于谁？由于前面的是False，所以本次逻辑判断取决于后面的值。
+# v5 = 8
+
+# or，看第一个值，如果第一个值为真，结果就应该是第一个值，否则就结果就是第二个值.(找真)
+# and，看第一个值，如果第一个值真，结果就应该是第二个值，否则结果就是第一个值。（找假）
+
+### 面试题
+
+如果多个and 和or的情况，先计算and再计算or.
+
+v1 = 0 or 4 and 3 or 7 or 9 and 6
+     0 or 3 or 7 or 9 and 6
+     0 or 3 or 7 or 6
+     3 or 7 or 6
+     3 or 6
+     3
+v2 = 8 or 3 and 4 or 2 and 0 or 9 and 7
+		 8
+  
+  
+v3 = 0 or 2 and 3 and 4 or 6 and 0 or 3
+		 4
+
+
+先计算not，在计算and，最后计算or
+
+v4 = not 8 or 3 and 4 or 2
+		 4
+
+#输入三次错误后继续输入
+count = 0
+   while count < 3:
+       count += 1
+       age = input("请输入年龄：")
+       age = int(age)
+       if age == 73:
+           print("恭喜你猜对了")
+           break
+       else:
+           print("猜错了")
+   
+       if count == 3:
+           choice = input("是否想继续玩(Y/N)？")
+           if choice == "N":
+               break
+           elif choice == "Y":
+               count = 0
+               continue
+           else:
+               print("内容输入错误")
+               break
+   
+3.进制转换
+v1 = bin(25) # 十进制转换为二进制
+print(v1) # "0b11001"
+
+v2 = oct(23) # 十进制转换为八进制
+print(v2) # "0o27"
+
+v3 = hex(28) # 十进制转换为十六进制
+print(v3) # "0x1c"
+i1 = int("0b11001",base=2) # 25
+
+i2 = int("0o27",base=8) # 23 
+
+i3 = int("0x1c",base=16) # 28 
+
+4.python 编码
+字符串（str）     "alex叫铁锤"             unicode处理               一般在内存
+字节（byte）      b"alexfdsfdsdfskdfsd"      utf-8编码 or gbk编码       一般用于文件或网络处理
+v1 = "武"
+
+v2 = "武".encode("utf-8")
+v2 = "武".encode("gbk")
+将一个字符串写入到一个文件中。
+
+name = "alex"
+data = name.encode("utf-8")
+
+# 打开一个文件
+file_object = open("log.txt",mode="wb")
+# 在文件中写内容
+file_object.write(data)
+# 关闭文件
+file_object.close()
+
+# 字符串类型
+name = "武沛齐"
+
+print(name) # 武沛齐
+# 字符串转换为字节类型
+data = name.encode("utf-8")
+print(data) # b'\xe6\xad\xa6\xe6\xb2\x9b\xe9\xbd\x90'
+
+# 把字节转换为字符串
+old = data.decode("utf-8")
+print(old)
+基于Python实现将字符串转换为字节（gbk编码）
+
+# 字符串类型
+name = "武沛齐"
+print(name) # 武沛齐
+# 字符串转换为字节类型
+data = name.encode("gbk")
+# print(data) # b'\xe6\xad\xa6\xe6\xb2\x9b\xe9\xbd\x90'  utf8，中文3个字节
+print(data) # b'\xce\xe4\xc5\xe6\xc6\xeb'              gbk，中文2个字节
+
+# 把字节转换为字符串
+old = data.decode("gbk")
+print(old)
