@@ -56,99 +56,99 @@
   "alex".功能(...)
   
   #判断字符串是否以“xx”开头，真则返回True
-  v1 = "alex"
-  result = v1.startswith("al")
-  print(result) #值为True
-  
-  #判断字符串是否以“xx”结尾，真则返回True
-  address = input("输入地址")
-  if address.endswith('村') :
-    print("农业户口")
-   else :
-    pass
+    v1 = "alex"
+    result = v1.startswith("al")
+    print(result) #值为True
+
+    #判断字符串是否以“xx”结尾，真则返回True
+    address = input("输入地址")
+    if address.endswith('村') :
+      print("农业户口")
+     else :
+      pass
     
    #判断字符串是否为十进制数，真则返回True,阿拉伯数字 isdigital() 
    #输入两个数相加
-   v1 = input("输入值")
-   v2 = input("输入值")
-   if v1.isdecimal() and v2.isdecimal() :
-      data= int(v1) +int(v2)
-      print(data)
-   else :
-      pass
-      
+     v1 = input("输入值")
+     v2 = input("输入值")
+     if v1.isdecimal() and v2.isdecimal() :
+        data= int(v1) +int(v2)
+        print(data)
+     else :
+        pass
+
     #去除字符串两边的空格、换行符、制表符 lstrip() 清除左边 rstrip() 清楚右边
-    msg= " h ell o  "
-    data = msg.strip()
-    print(data) #得到 "h ell o"
-    
+      msg= " h ell o  "
+      data = msg.strip()
+      print(data) #得到 "h ell o"
+
     补充：去除字符串两边指定内容
-    msg= " h ell o  "
-    data = msg.strip("o") #去除两边的o  去除单边加r/l
-    print(data) #得到 "h ell "
-    
+      msg= " h ell o  "
+      data = msg.strip("o") #去除两边的o  去除单边加r/l
+      print(data) #得到 "h ell "
+
     
     #字符串变为大写   
-    code = input("请输入验证码")
-    value = code.uuper()
-    data = value.strip()
-    if data == "FGH2" :
-      print("正确")
-    else :
-      print("错误")
-      
+      code = input("请输入验证码")
+      value = code.uuper()
+      data = value.strip()
+      if data == "FGH2" :
+        print("正确")
+      else :
+        print("错误")
+
     #字符串替换
-    content = input("请输入评论信息") #草包
-    content = content.replace("草",*")
-    print(content) #输出结果*包
-    
-    char_list = ["草泥马",钢球”,"alex")
-    content = input("请输入评论信息") 
-    for item in char_list #列表循环
-      content = content.repalce(item,"**")
-    print(content)
-    
+      content = input("请输入评论信息") #草包
+      content = content.replace("草",*")
+      print(content) #输出结果*包
+
+      char_list = ["草泥马",钢球”,"alex")
+      content = input("请输入评论信息") 
+      for item in char_list #列表循环
+        content = content.repalce(item,"**")
+      print(content)
+
     #字符切割，得到一个列表
-    data = "武沛齐|root|wupeiqi@qq.com"
-    result = data.split('|') # ["武沛齐","root","wupeiqi@qq.com"]
-    print(data) # "武沛齐|root|wupeiqi@qq.com"
-    print(result) # 输出 ["武沛齐","root","wupeiqi@qq.com"] 根据特定字符切开之后保存在列表中，方便以后的操作
-   
-    info = "武沛齐,root"   # 备注：字符串中存储了用户名和密码
-    user_list = info.split(',')    # 得到一个包含了2个元素的列表 [ "武沛齐" , "root" ]
+      data = "武沛齐|root|wupeiqi@qq.com"
+      result = data.split('|') # ["武沛齐","root","wupeiqi@qq.com"]
+      print(data) # "武沛齐|root|wupeiqi@qq.com"
+      print(result) # 输出 ["武沛齐","root","wupeiqi@qq.com"] 根据特定字符切开之后保存在列表中，方便以后的操作
 
-    # user_list[0]
-    # user_list[1]
+      info = "武沛齐,root"   # 备注：字符串中存储了用户名和密码
+      user_list = info.split(',')    # 得到一个包含了2个元素的列表 [ "武沛齐" , "root" ]
 
-    user = input("请输入用户名：")
-    pwd = input("请输入密码：")
+      # user_list[0]
+      # user_list[1]
 
-    if user == user_list[0] and pwd == user_list[1]:
-      print("登录成功")
-    else:
-      print("用户名或密码错误")
+      user = input("请输入用户名：")
+      pwd = input("请输入密码：")
+
+      if user == user_list[0] and pwd == user_list[1]:
+        print("登录成功")
+      else:
+        print("用户名或密码错误")
       
-    扩展：从左到右切几个
-    data = "武沛齐|root|wupeiqi@qq.com"
-    v1 = data.split("|")   # ['武沛齐', 'root', 'wupeiqi@qq.com']
-    print(v1)
+      扩展：从左到右切几个
+      data = "武沛齐|root|wupeiqi@qq.com"
+      v1 = data.split("|")   # ['武沛齐', 'root', 'wupeiqi@qq.com']
+      print(v1)
 
-    v2 = data.split("|", 2) # ['武沛齐', 'root|wupeiqi@qq.com'] 
-    print(v2)
-    
-    再扩展：加r/l 表示从左往右或者右往左
-    data = "武沛齐,root,wupeiqi@qq.com"
+      v2 = data.split("|", 2) # ['武沛齐', 'root|wupeiqi@qq.com'] 
+      print(v2)
 
-    v1 = data.rsplit(',')
-    print(v1) # ['武沛齐', 'root', 'wupeiqi@qq.com']
+      再扩展：加r/l 表示从左往右或者右往左
+      data = "武沛齐,root,wupeiqi@qq.com"
 
-    v2 = data.rsplit(',',1) 
-    print(v2) # ['武沛齐,root', 'wupeiqi@qq.com']
-    
-    file_path = "xxx/xxxx/xx.xx/xxx.mp4"
-    data_list = file_path.rsplit(".",1) # ["xxx/xxxx/xx.xx/xxx","mp4"]
-    data_list[0]
-    data_list[1]
+      v1 = data.rsplit(',')
+      print(v1) # ['武沛齐', 'root', 'wupeiqi@qq.com']
+
+      v2 = data.rsplit(',',1) 
+      print(v2) # ['武沛齐,root', 'wupeiqi@qq.com']
+
+      file_path = "xxx/xxxx/xx.xx/xxx.mp4"
+      data_list = file_path.rsplit(".",1) # ["xxx/xxxx/xx.xx/xxx","mp4"]
+      data_list[0]
+      data_list[1]
     
     #字符串拼接
     data_list = ["逆天",“发威”,“沙包”]
@@ -156,18 +156,18 @@
     print(v1)
     
     #格式化字符串（与前面笔记类似）
-    name = "{0}的喜欢干很多行业，例如有：{1}、{2} 等"
-    data = name.format("老王","物理家","工程师")
-    print(data) # 老王的喜欢干很多行业，例如有：物理家、工程师 等
-    print(name) # "{0}的喜欢干很多行业，例如有：{1}、{2} 等"
-    
-    name = "{}的喜欢干很多行业，例如有：{}、{} 等"
-    data = name.format("老王","物理家","工程师")
-    print(data) # 老王的喜欢干很多行业，例如有：物理家、工程师 等
-    
-    name = "{name}的喜欢干很多行业，例如有：{h1}、{h2} 等"
-    data = name.format(name="老王",h1="物理家",h2="工程师")
-    print(data) # 老王的喜欢干很多行业，例如有：物理家、工程师 等
+      name = "{0}的喜欢干很多行业，例如有：{1}、{2} 等"
+      data = name.format("老王","物理家","工程师")
+      print(data) # 老王的喜欢干很多行业，例如有：物理家、工程师 等
+      print(name) # "{0}的喜欢干很多行业，例如有：{1}、{2} 等"
+
+      name = "{}的喜欢干很多行业，例如有：{}、{} 等"
+      data = name.format("老王","物理家","工程师")
+      print(data) # 老王的喜欢干很多行业，例如有：物理家、工程师 等
+
+      name = "{name}的喜欢干很多行业，例如有：{h1}、{h2} 等"
+      data = name.format(name="老王",h1="物理家",h2="工程师")
+      print(data) # 老王的喜欢干很多行业，例如有：物理家、工程师 等
     
     #字符串转换为字节类型
     data = "alex"
@@ -222,28 +222,87 @@
     print(value) #print(message[index])
     index +=1
     
-   #获取字符串中子序列，切片
-   message = "逆天发威沙包"
+   #获取字符串中子序列，切片  ***从第n个开始到第n个前
+   message = "逆天发威沙包" 
    print(message[0:2]) #逆天,从0开始
-   print(message[1:])#发威沙包
-   print(message[:5]) #逆天发威傻
+   print(message[2:])#发威沙包
+   print(message[:5]) #逆天发威沙
    
-   print(message[4:-1]) #
-  
+   print(message[4:-1]) #沙
+   print(message[4,len(message)]) #"沙包" 直接到字符串结束
     
+    message = "来做点py交易呀" 
+    value = message[:3]+"python" + messae[5:]
+    print(value)
     
+    #步长、跳着去链接字符串的内容
+    name = "生活不是电影，生活比电影苦"
+    print(name[0:5:2]) #在[0,4]区间内取字符，最后数字默认是1，2是隔一个字符取一个
+    #输出结果为："生不电"
+    print(name[:8:2]) # 第一个数字不写默认是从0开始，输出结果为："生不电，"
+    print(name[2::3])#从2到结束，输出结果为："不影不活"，3表示隔开2个字符
+    print(name[8:1:-1]) #负值倒数取值，区间为[2,8],输出结果为:"活生，影电是不"
     
+    print(name[::-1]) #字符串取反
     
+    #循环
+    while循环
+     message = "逆天发威"
+     index = 0
+     while index <led(message):
+      value = message[index]  
+      print(value) #print(message[index])
+      index +=1
+     
+     for循环
+      message = "逆天发威"
+      for char in message:
+        print(char)
+        
+     range,创建一些列数数字
+       range(10) #[0,1,2,3,4,5,6,7,8,9]
+       range(1,10) #[1,9] 前取后不取
+       range(1,10,2) #隔一个数字取 1，3，5，7，9 步长为2
+       range(10,1,-1) [9,8,7,6,5,4,3,2,1]
+       
+      for+range组合
+       for i in range(10) :
+        print(i)
+       
+       message = "来做点py交易呀"
+       
+       for i in range(5) :#从0-4循环
+        message[i]
+       
+       for i in range(len(message)) :
+        print(message[i]) #打印全部
     
+      break和continue
+        message = "来做点py交易呀"
+         for char in message :
+          if char == "p"
+            continue
+          print(char) #不打印p
+       
+       嵌套循环
+        for i in range(5) #5行3列
+          print(i)
+          for j in range(3)
+            print(j) 
+            
+  1.3.3 类型转换
+    num = 999
+      data = str(num)
+      
+    data_list = ["alex",999]
+    data = str(data_list) #列表转换
     
+    字符串不可修改
+      name = "alex"
+        name[1]
+        name[1:2] #只读
+        
+      num_list = [11 , 22 ,33]
+      num_list[0]= 666 #列表数字可修改
     
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
+          
