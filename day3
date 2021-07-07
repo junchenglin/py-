@@ -179,9 +179,20 @@
     
     #将字符串内容剧中，居左，居右展示
     
-    v1 = ""
+    v1 = "alex"
+    data = v1.center(20,*) # 以星号填充 
     
+    data = v1.just(21,"-") #居中 ljust：居左 rjust：居右
     
+    #填充0
+     data = "alex"
+     v1 = data.zfill(10)
+     print(v1) #000000alex
+     
+     补充：一般处理二进制数
+     data = "101"
+     v1 = data.zfill(8)
+     print(v1)
     
     
     
