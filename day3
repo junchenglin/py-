@@ -181,7 +181,7 @@
     
     v1 = "alex"
     data = v1.center(20,*) # 以星号填充 
-    
+      
     data = v1.just(21,"-") #居中 ljust：居左 rjust：居右
     
     #填充0
@@ -194,14 +194,42 @@
      v1 = data.zfill(8)
      print(v1)
     
+1.3.2公共功能
+  #相加
+  v1="alex"
+  v2="18"
+  v3 = v1 +v2 #拼接功能
+  
+  #相乘
+  v1 = "alex"*3
+  
+  #长度
+  num = len("lex")
+  print(num) #长度为3
+  
+  #获取字符串中字符，索引
+  message = "逆天发威"
+   message[0]：逆
+   message[1]：天
+   message[-1]：威
+   message[-2]：发  
+   注意：字符串中是能通过索引取值，无法修改值
+   
+   message = "逆天发威"
+   index = 0
+   while index <led(message):
+    value = message[index]  
+    print(value) #print(message[index])
+    index +=1
     
-    
-    
-    
-    
-    
-    
-    
+   #获取字符串中子序列，切片
+   message = "逆天发威沙包"
+   print(message[0:2]) #逆天,从0开始
+   print(message[1:])#发威沙包
+   print(message[:5]) #逆天发威傻
+   
+   print(message[4:-1]) #
+  
     
     
     
