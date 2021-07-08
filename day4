@@ -171,6 +171,197 @@
   del user_list[1:]
   print(user_list) # 输出 ['范德彪']
   
-  1.3.7步长
+  1.3.7步长，前取后不取
+  user_list = ["范德彪", "刘华强", '尼古拉斯赵四']
+  useer_list[0::2] 隔一个取一个 后空全取
   
+  #翻转 
+  user_list.reverse() #字符串不可用
+  user_list[::-1]
   
+  1.3.8for循环
+  user_list = ["范德彪","刘华强",'尼古拉斯赵四',"宋小宝","刘能"]
+  for item in user_list:
+    print(item)
+  user_list = ["范德彪","刘华强",'尼古拉斯赵四',"宋小宝","刘能"]
+
+  for index in range( len(user_list) ):
+      item = user_index[index]
+      print(item)
+      
+  切记，循环的过程中对数据进行删除会踩坑
+  # 错误方式， 有坑，结果不是你想要的。 边循环边删除下标会改变
+
+  user_list = ["刘的话", "范德彪", "刘华强", '刘尼古拉斯赵四', "宋小宝", "刘能"]
+  for item in user_list: 第一轮从第零个开始，第二轮从第一个开始，删了元素下标会改变
+      if item.startswith("刘"):
+          user_list.remove(item)
+  print(user_list)
+
+  # 正确方式，倒着删除。
+  user_list = ["刘的话", "范德彪", "刘华强", '刘尼古拉斯赵四', "宋小宝", "刘能"]
+  for index in range(len(user_list) - 1, -1, -1):  #5 4 3 2 1  前取后不取 最后到-1前
+      item = user_list[index]
+      if item.startswith("刘"):
+          user_list.remove(item)
+  print(user_list)
+  
+1.4转换
+  字符串
+  name = "alex"
+  data = list(name)
+  print(data) #["a","l","e","x"]
+  
+  元组
+  v1 = (11,22,33,11)
+  vv1 = list(v1)
+  
+  集合
+  v2 = ("aa","bb")
+  vv2 = list(v2)
+  
+ 1.5嵌套
+  列表属于容器，内部可以存放各种数据，所以他也支持列表的嵌套，如：
+  data = [ "谢广坤",["海燕","赵本山"],True,[11,22,[999,123],33,44],"宋小宝" ]
+  对于嵌套的值，可以根据之前学习的索引知识点来进行学习，例如：
+  data = [ "谢广坤",["海燕","赵本山"],True,[11,22,33,44],"宋小宝" ]
+  
+  print( data[0] ) # "谢广坤"
+  print( data[1] ) # ["海燕","赵本山"]
+  print( data[0][2] ) # "坤"
+  print( data[1][-1] ) # "赵本山"
+  data.append(666)
+  print(data) # [ "谢广坤",["海燕","赵本山"],True,[11,22,33,44],"宋小宝",666]
+
+  data[1].append("谢大脚")
+  print(data) # [ "谢广坤",["海燕","赵本山","谢大脚"],True,[11,22,33,44],"宋小宝",666 ]
+
+
+  del data[-2]
+  print(data) # [ "谢广坤",["海燕","赵本山","谢大脚"],True,[11,22,33,44],666 ]
+
+
+  data[-2][1] = "alex"
+  print(data) # [ "谢广坤",["海燕","赵本山","谢大脚"],True,[11,"alex",33,44],666 ]
+
+
+  data[1][0:2] = [999,666]
+  print(data) # [ "谢广坤",[999,666,"谢大脚"],True,[11,"alex",33,44],666 ]
+
+  #用户名与密码存储
+  user_list = []
+  while True:
+      user = input("请输入用户名：")
+      pwd = input("请输入密码：")
+      data = []
+      data.append(user)
+      data.append(pwd) 
+      user_list.append(data)
+      
+      
+  user_list = []
+  while True:
+      user = input("请输入用户名(Q退出)：")
+      if user == "Q":
+          break
+      pwd = input("请输入密码：")
+      data = [user,pwd]
+      user_list.append(data)
+  print(user_list)
+
+2.元组
+  列表（list），是一个有序且可变的容器，在里面可以存放多个不同类型的元素。
+  元组（tuple），是一个有序且不可变的容器，在里面可以存放多个不同类型的元素。
+  
+  v1 = (11,22,33)
+  v2 = ("李杰","Alex")
+  v3 = (True,123,"Alex",[11,22,33,44]) #列表内元素可变，列表整体不可变
+
+  # 建议：议在元组的最后多加一个逗v3 = ("李杰","Alex",)
+  d1 = (1)  # 1 只有一个表示整形
+  d2 = (1,) # (1,)
+
+  d3 = (1,2)
+  d4 = (1,2)
+
+2.1公共功能
+2.1.1 相加，两个列表相加获取生成一个新的列表。
+data = ("赵四","刘能") + ("宋晓峰","范德彪")
+print(data) # ("赵四","刘能","宋晓峰","范德彪")
+
+v1 = ("赵四","刘能")
+v2 = ("宋晓峰","范德彪")
+v3 = v1 + v2
+print(v3) # ("赵四","刘能","宋晓峰","范德彪")
+
+2.1.2相乘，列表*整型 将列表中的元素再创建N份并生成一个新的列表。
+data = ("赵四","刘能") * 2
+print(data) # ("赵四","刘能","赵四","刘能")
+
+v1 = ("赵四","刘能")
+v2 = v1 * 2
+print(v1) # ("赵四","刘能")
+print(v2) # ("赵四","刘能","赵四","刘能")
+
+2.1.3获取长度
+user_list = ("范德彪","刘华强",'尼古拉斯赵四',)
+print( len(user_list) )
+
+2.1.4索引
+user_list = ("范德彪","刘华强",'尼古拉斯赵四',)
+print( user_list[0] )
+print( user_list[2] )
+print( user_list[3] )
+
+2.1.5切片
+user_list = ("范德彪","刘华强",'尼古拉斯赵四',)
+print( user_list[0:2] )
+print( user_list[1:] )
+print( user_list[:-1] )
+
+2.1.6步长
+user_list = ("范德彪","刘华强",'尼古拉斯赵四',"宋小宝","刘能")
+print( user_list[1:4:2] )
+print( user_list[0::2] )
+print( user_list[1::2] )
+print( user_list[4:1:-1] )
+# 字符串 & 元组。
+user_list = ("范德彪","刘华强",'尼古拉斯赵四',"宋小宝","刘能")
+data = user_list[::-1]
+
+# 列表
+user_list = ["范德彪","刘华强",'尼古拉斯赵四',"宋小宝","刘能"]
+data = user_list[::-1]
+user_list.reverse()
+print(user_list)
+
+2.1.7for循环
+user_list = ("范德彪","刘华强",'尼古拉斯赵四',"宋小宝","刘能")
+for item in user_list:
+	print(item)
+user_list = ("范德彪","刘华强",'尼古拉斯赵四',"宋小宝","刘能")
+for item in user_list:
+ if item == '刘华强':
+	 continue
+ print(name)
+目前：只有 str、list、tuple 可以被for循环。 "xxx" [11,22,33] (111,22,33)
+
+2.1.8 len + range + for + 索引
+user_list = ("范德彪","刘华强",'尼古拉斯赵四',"宋小宝","刘能")
+for index in range(len(user_list)):
+    item = user_list[index]
+    print(item)
+
+
+
+
+
+
+
+
+
+
+
+
+
+
