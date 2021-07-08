@@ -1,0 +1,48 @@
+1.函数
+def 函数名():
+  print(1)
+  print(2)
+  ...
+
+函数名()
+
+1.1默认参数
+def func(a1,a2,a3) ：
+  print(a1+a2+a3)
+  
+
+func(a1=1,a2=2,a3=2) #有关键字 全都要
+func(1,1,1)
+
+1.2动态参数
+  def func(*args):
+    print(args) # 元组类型 (22,)   (22,33,99,) ()
+
+    # 只能按照位置传参
+    func(22)
+    func(22,33)
+    func(22,33,99)
+    func()
+    **
+
+    def func(**kwargs):
+        print(kwargs) # 字典类型 {"n1":"武沛齐"}    {"n1":"武沛齐","age":"18","email":"xxxx"}  {}
+
+    # 只能按关键字传参
+    func(n1="武沛齐")
+    func(n1="武沛齐",age=18)
+    func(n1="武沛齐",age=18,email="xx@live.com")
+    ,*
+
+    def func(*args,**kwargs):
+        print(args,kwargs) # (22,33,99) {}
+
+    func(22,33,99)
+    func(n1="武沛齐",age=18)
+    func(22,33,99,n1="武沛齐",age=18)
+    func()
+    
+    #** 必须放在 * 的后面
+    def func1(*args, **kwargs):
+    print(args, **kwargs)
+    
