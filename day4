@@ -353,12 +353,43 @@ for index in range(len(user_list)):
     print(item)
 
 
+2.2转换
+ data = tuple(其他)
+ #str/ list
+ 
+ name = "alex"
+ data = tuple(name)
+ print(data) #("a","l","e","x")
+ 
+ name = ["alex",18,"aaa"]
+ data = tuple(name)
+ print(data) #("alex",18,"aaa")
+ 
+2.3嵌套
+元素内以嵌套
+ tu = ["alex",[111,33,22],"aaa",("bbb","ccc"),"ddd"]
+ tu[2] = "xxx" #"aaa"改为"xxx"
+ tu[3] =('ddd','fff') #将元组("bbb","ccc")修改
+ tu.insert(0,"zhouzhou") #在第零个元素插入周周
 
-
-
-
-
-
+ 	user_list = []
+	while True :
+		user = input("用户名")
+		if user == "Q" :
+			break
+		pwd = input("密码")
+		item = (user,pwd,)
+		user_list.append(item)
+	print(user_list)
+ print("开始登陆")
+ user = input("用户名")
+ pwd = input("密码")
+ is_success = False
+ 
+ for index in range(len(user_list)) :
+ #item = ("alex","123") ,("aaa","123"),("cccc","4560")
+ 	if user == li(index) and pwd == item()
+用户在列表中登录
 
 
 
