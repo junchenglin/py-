@@ -45,4 +45,53 @@ func(1,1,1)
     #** 必须放在 * 的后面
     def func1(*args, **kwargs):
     print(args, **kwargs)
+
+1.3返回参数
+    返回值可以是任意类型，如果函数中没写return，则默认返回None
+def func():
+    return [1,True,(11,22,33)]
+result = func()
+print(result)
+
+def func():
+    value = 1 + 1    
+ret = func()
+print(ret) # None
+
+当在函数中未写返回值 或 return 或 return None ，执行函数获取的返回值都是None。
+def func():
+    value = 1 + 1
+    return  # 或 return None
+
+ret = func()
+print(ret) # None
+
+return后面的值如果有逗号，则默认会将返回值转换成元组再返回。
+def func():
+    return 1,2,3
+
+value = func()
+print(value) # (1,2,3)
+
+函数一旦遇到return就会立即退出函数（终止函数中的所有代码）
+def func():
+    print(1)
+    return "结束吧"
+	print(2)  
+ret = func()
+print(ret)
+
+def func():
+    print(1)
+    for i in range(10):
+        print(i)
+        return 999
+	print(2)
     
+result = func()
+print(result)
+
+# 输出
+1
+0
+999
