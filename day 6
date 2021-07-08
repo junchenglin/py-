@@ -1,0 +1,95 @@
+1.文件操作
+ 字符串类型（str），在程序中本质上为unicode编码中的二进制
+ 字节类型（bytes），本质上是utf/gbk等编码的二进制
+ name = "alex"
+ data = name.encode("utf-8")
+ print(data) 
+ result = data.decode('utf-8') #字符串复原
+ 
+1.1读文件
+  #读文本
+  file_object = open('info.txt',mode = 'rb',encoding = 'utf-8') #r表示读，b表示二进制
+  data = file_object.read()
+  file_object.close()
+  print(data)
+  data = data.decode('utf-8')
+  
+ #读非文本
+ file_object = open('al.png',mode = 'rb') #windows绝对路径 r'C:\NEW\info.tex' 路径加r
+ data = file_object.read()
+ file_object.close()
+ print(data)
+ 
+ 读文件，文件不存在会报错
+ #判断路径是否存在
+ import os 
+ os.path.exists("info.text") #存在返回True
+ 
+ 1.2写文件
+  #写文件文本
+  file_object = open("t1.txt",mode = 'wb',encoding = 'utf-8') #压缩成utf-8编码 第三个不写默认就是utf 
+  file_object.writ("alex".encode("utf-8"))
+  file_object.close()  #打开、写、关闭
+  
+  #写图片等文件
+  f1 = open('a1.png',mode = 'rb') #文件指针赋值
+  content = f1.read()
+  f1.close()
+  f2 = open('a2.png',mode = 'wb')
+  f2.write(content)
+  f2.close
+  
+  #例子：用户信息存储
+  while True :
+    user = input("用户名")
+      if user.upper() == "Q" :
+        break
+    pwd = input("密码")
+    data ="{}-{}".format(user,pwd)
+    file_object = open("files/info.txt",mode = 'wb',encoding = 'utf-8')
+    file_object.write(data)
+    file_object.close()
+    
+   #网络文本下载txt内容
+  import requests # pin3 install requests
+  res = requests.get(
+    url = ""
+    header = {
+    }
+    
+   )
+   print(res.content) #可写在文本
+   
+    只读：r、rt、rb （用）
+    存在，读
+    不存在，报错
+    
+    只写：w、wt、wb（用） 清空文件
+    存在，清空再写
+    不存在，创建再写
+    
+    只写：x、xt、xb
+    存在，报错
+    不存在，创建再写。
+    
+    只写：a、at、ab【尾部追加】（用）
+    存在，尾部追加。
+    不存在，创建再写。
+   
+    读写
+    r+、rt+、rb+，默认光标位置：起始位置
+    x+、xt+、xb+，默认光标位置：起始位置（新文件）
+    a+、at+、ab+，默认光标位置：末尾
+   
+   #多用户信心录入 追加写
+   while True:
+    user = input("用户名：")
+    if user.upper() == "Q":
+        break
+    pwd = input("密码：")
+    data = "{}-{}\n".format(user, pwd)
+    file_object = open('files/account.txt', mode='a')
+    file_object.write(data)
+    file_object.close()
+    
+    
