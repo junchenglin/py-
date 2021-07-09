@@ -1,0 +1,267 @@
+函数作用域
+  Python以函数为作用域，所以在函数内创建的所有数据，可以此函数中被使用，无法在其他函数中被使用。
+
+    def func():
+        name = "武沛齐"
+        data_list = [11,22,33,44]
+        print(name,data_list)
+        age = 20
+        print(age)
+
+    def handler():
+        age = 18
+        print(age)
+
+    func()
+    handler()
+    
+    学会分析代码，了解变量到底属于哪个作用域且是否可以被调用：
+    def func():
+        name = "武沛齐"
+        age = 29
+        print(age)
+        data_list = [11,22,33,44]
+        print(name,data_list)
+
+        for num in range(10):
+            print(num)
+
+        print(num) #不会报错，py以函数为作用域，num被创建了
+
+        if 1 == 1:
+            value = "admin"
+            print(value)
+      print(value) #不报错
+ 
+        if 1 > 2:
+            max_num = 10
+            print(max_num)
+      print(max_num)   #会报错 没有执行 man_num = 10
+
+
+    def handler():
+        age = 18
+        print(age)
+
+    handler()
+    func()
+    
+1.函数嵌套
+      优先在自己的作用域找，自己没有就去上级作用域。
+      在作用域中寻找值时，要确保此次此刻值是什么。
+      分析函数的执行，并确定函数作用域链。（函数嵌套）
+      def func():
+      print("沙河高晓松")
+
+      def handler():
+          print("昌平吴彦祖")
+          def inner():
+              print("朝阳大妈")
+        inner()
+          func()
+          print("海淀网友")
+
+      handler()
+      
+      """
+      生成图片验证码的示例代码，需要提前安装pillow模块（Python中操作图片中一个第三方模块）
+        pip3 install pillow
+      """
+      import random
+      from PIL import Image, ImageDraw, ImageFont
+
+
+      def create_image_code(img_file_path, text=None, size=(120, 30), mode="RGB", bg_color=(255, 255, 255)):
+          """ 生成一个图片验证码 """
+          _letter_cases = "abcdefghjkmnpqrstuvwxy"  # 小写字母，去除可能干扰的i，l，o，z
+          _upper_cases = _letter_cases.upper()  # 大写字母
+          _numbers = ''.join(map(str, range(3, 10)))  # 数字
+          chars = ''.join((_letter_cases, _upper_cases, _numbers))
+
+          width, height = size  # 宽高
+          # 创建图形
+          img = Image.new(mode, size, bg_color)
+          draw = ImageDraw.Draw(img)  # 创建画笔
+
+          def get_chars():
+              """生成给定长度的字符串，返回列表格式"""
+              return random.sample(chars, 4)
+
+          def create_lines():
+              """绘制干扰线"""
+              line_num = random.randint(*(1, 2))  # 干扰线条数
+
+              for i in range(line_num):
+                  # 起始点
+                  begin = (random.randint(0, size[0]), random.randint(0, size[1]))
+                  # 结束点
+                  end = (random.randint(0, size[0]), random.randint(0, size[1]))
+                  draw.line([begin, end], fill=(0, 0, 0))
+
+          def create_points():
+              """绘制干扰点"""
+              chance = min(100, max(0, int(2)))  # 大小限制在[0, 100]
+
+              for w in range(width):
+                  for h in range(height):
+                      tmp = random.randint(0, 100)
+                      if tmp > 100 - chance:
+                          draw.point((w, h), fill=(0, 0, 0))
+
+          def create_code():
+              """绘制验证码字符"""
+              if text:
+                  code_string = text
+              else:
+                  char_list = get_chars()
+                  code_string = ''.join(char_list)  # 每个字符前后以空格隔开
+
+              # Win系统字体
+              # font = ImageFont.truetype(r"C:\Windows\Fonts\SEGOEPR.TTF", size=24)
+              # Mac系统字体
+              # font = ImageFont.truetype("/System/Library/Fonts/SFNSRounded.ttf", size=24)
+              # 项目字体文件
+              font = ImageFont.truetype("MSYH.TTC", size=15)
+              draw.text([0, 0], code_string, "red", font=font)
+              return code_string
+
+          create_lines()
+          create_points()
+          code = create_code()
+
+          # 将图片写入到文件
+          with open(img_file_path, mode='wb') as img_object:
+              img.save(img_object)
+          return code
+
+
+      code = create_image_code("a2.png")
+      print(code)
+      
+ 1.1闭包
+  闭包，简而言之就是将数据封装在一个包（区域）中，使用时再去里面取。（本质上 闭包是基于函数嵌套搞出来一个中特殊嵌套）
+
+  闭包应用场景1：封装数据防止污染全局。
+
+  name = "武沛齐"
+
+  def f1():
+      print(name, age)
+
+  def f2():
+    print(name, age)
+
+  def f3():
+    print(name, age)
+
+  def f4():
+      pass
+  def func(age):
+      name = "武沛齐"
+
+      def f1():
+          print(name, age)
+
+      def f2():
+          print(name, age)
+
+      def f3():
+          print(name, age)
+
+      f1()
+      f2()
+      f3()
+
+  func(123)
+
+
+
+    def task(arg):
+    def inner():
+        print(arg)
+    return inner  #返回函数名
+
+    inner_func_list = []
+    for val in [11,22,33]:
+        inner_func_list.append( task(val) )
+
+    inner_func_list[0]() # 11
+    inner_func_list[1]() # 22
+    inner_func_list[2]() # 33
+   
+   
+   #多线程下载视频
+    from concurrent.futures.thread import ThreadPoolExecutor
+    import requests
+
+    #返回视频二进制信息
+    def download_video(url):
+        res = requests.get(
+            url=url,
+            headers={
+                "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36 FS"
+            }
+        )
+        return res.content
+
+    #视频下载到本地对应文件
+    def outer(file_name):
+        def write_file(response):
+            content = response.result()
+            with open(file_name, mode='wb') as file_object:
+                file_object.write(content)
+
+        return write_file
+
+    #线程池10个
+    POOL = ThreadPoolExecutor(10)
+
+    video_dict = [
+        ("东北F4模仿秀.mp4", "https://aweme.snssdk.com/aweme/v1/playwm/?video_id=v0300f570000bvbmace0gvch7lo53oog"),
+        ("卡特扣篮.mp4", "https://aweme.snssdk.com/aweme/v1/playwm/?video_id=v0200f3e0000bv52fpn5t6p007e34q1g"),
+        ("罗斯mvp.mp4", "https://aweme.snssdk.com/aweme/v1/playwm/?video_id=v0200f240000buuer5aa4tij4gv6ajqg")
+    ]
+    for item in video_dict:
+        #去线程池取一个人，执行下载函数
+        future = POOL.submit(download_video, url=item[1])
+        #下载完成后，之后执行某个函数
+        future.add_done_callback(outer(item[0]))
+
+    POOL.shutdown()
+    
+    1.2装饰器
+      实现在函数执行前和执行后分别输入 "before" 和 "after"。
+      def func():
+        print("我是func函数")
+        value = (11, 22, 33, 44)
+        return value
+
+
+      def outer(origin):
+          def inner():
+              print('inner')
+              origin()
+              print("after")
+
+          return inner
+
+      func = outer(func)
+      result = func()
+      处理返回值：
+
+      def func():
+          print("我是func函数")
+          value = (11, 22, 33, 44)
+          return value
+
+
+      def outer(origin):
+          def inner():
+              print('inner')
+              res = origin()
+              print("after")
+              return res
+          return inner
+
+      func = outer(func)
+      result = func()
