@@ -496,9 +496,52 @@ with open('db.csv',mode = 'r' ,encoding = 'utf-8') as f :
 		func(*param_list) #执行函数，传入实参
 		
 	
+2.1函数名赋值
+	
+2.1.1将函数名赋值给其他变量，函数名其实就个变量，代指某函数；如果将函数名赋值给另外一个变量，则此变量也会代指该函数，例如：
+	def func(a1,a2):
+	    print(a1,a2)
+	xxxxx = func
 
+	# 此时，xxxxx和func都代指上面的那个函数，所以都可以被执行。
+	func(1,1)
+	xxxxx(2,2)
+	def func(a1,a2):
+	    print(a1,a2)
 
+	func_list = [func,func,func]
 
+	func(11,22)
+	func_list[0](11,22) #func_list[0] = func
+	func_list[1](33,44)
+	func_list[2](55,66)
+	
+2.1.2对函数名重新赋值，如果将函数名修改为其他值，函数名便不再代指函数，例如：	
+	def func(a1,a2)
+		print(a1,a2)
+	func = "alex" #func重新赋值一个字符串
+	
+2.2函数名做参数和返回值	
+	#参数
+	 def plus(num) ：
+	 	return num+100
+	
+	 def handler(func) :
+	 	res =func(10)
+	
+	 handler(plus)
 
+	#返回值	
+	def plus(num):
+	    return num + 100
 
+	def handler():
+		print("执行handler函数")
+	    return plus
+
+	result = handler() #返回一个函数入口
+	data = result(20) # 120
+	print(data)
+
+ 
 
