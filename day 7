@@ -95,3 +95,184 @@ print(result)
 1
 0
 999
+
+ #参数补充，传递内存地址 ，只能对内部元素进行修改
+ #参数是可变类型：list/dict/set & 在函数内部只能对内部元素进行修改
+ def func(data) :
+ 	data = ["wupeiqi","alex"] #data.append(666)  变成[11,22,33,666]
+ v1 =[11,22,33]
+ func(v1)
+ print(v1) #[11,22,33]
+ 
+1.4默认参数值，没传参则使用函数默认定义的值
+	# 在函数内存中会维护一块区域存储 [1,2,666,666,666] 100010001
+	def func(a1,a2=[1,2]):
+	    a2.append(666)
+	    print(a1,a2)
+
+	# a1=100
+	# a2 -> 100010001
+	func(100) # 100  [1,2,666]
+
+	# a1=200
+	# a2 -> 100010001
+	func(200) # 200 [1,2,666,666]
+
+	# a1=99
+	# a2 -> 1111111101
+	func(99,[77,88]) # 66 [177,88,666]
+
+	# a1=300
+	# a2 -> 100010001
+	func(300) # 300 [1,2,666,666,666] 
+	大坑
+
+	# 在内部会维护一块区域存储 [1, 2, 10, 20,40 ] ,内存地址 1010101010
+	def func(a1, a2=[1, 2]):
+	    a2.append(a1)
+	    return a2
+
+	# a1=10
+	# a2 -> 1010101010
+	# v1 -> 1010101010
+	v1 = func(10)
+	print(v1) # [1, 2, 10]
+
+	# a1=20
+	# a2 -> 1010101010
+	# v2 -> 1010101010
+	v2 = func(20)
+	print(v2) # [1, 2, 10, 20 ]
+
+	# a1=30
+	# a2 -> 11111111111        [11, 22,30]
+	# v3 -> 11111111111
+	v3 = func(30, [11, 22])
+	print(v3) #  [11, 22,30]
+
+	# a1=40
+	# a2 -> 1010101010
+	# v4 -> 1010101010
+	v4 = func(40)
+	print(v4) # [1, 2, 10, 20,40 ] 
+	深坑
+
+	# 内存中创建空间存储 [1, 2, 10, 20, 40] 地址：1010101010
+	def func(a1, a2=[1, 2]):
+	    a2.append(a1)
+	    return a2
+
+	# a1=10
+	# a2 -> 1010101010
+	# v1 -> 1010101010
+	v1 = func(10)
+
+
+	# a1=20
+	# a2 -> 1010101010
+	# v2 -> 1010101010
+	v2 = func(20)
+
+	# a1=30
+	# a2 -> 11111111111   [11,22,30]
+	# v3 -> 11111111111
+	v3 = func(30, [11, 22])
+
+	# a1=40
+	# a2 -> 1010101010
+	# v4 -> 1010101010
+	v4 = func(40)
+
+	print(v1) # [1, 2, 10, 20, 40]
+	print(v2) # [1, 2, 10, 20, 40]
+	print(v3) # [11,22,30]
+	print(v4) # [1, 2, 10, 20, 40] 	
+
+
+1.5动态参数
+	动态参数，定义函数时在形参位置用 *或** 可以接任意个参数。
+	def func(*args,**kwargs):
+	    print(args,kwargs)
+	func("宝强","杰伦",n1="alex",n2="eric")
+
+1.5.1形参固定，实参用* 和**
+	def func(a1,a2):
+		print(a1,a2)
+	func(*[11,22]) #按位置传给a1，a2
+	
+	def func(*args,**kwargs):
+    print(args,kwargs)
+    
+	func( 11, 22 )
+	func( 11, 22, name="武沛齐", age=18 )
+
+	# 小坑，([11,22,33], {"k1":1,"k2":2}), {}
+	func( [11,22,33], {"k1":1,"k2":2} )
+
+	# args=(11,22,33),kwargs={"k1":1,"k2":2}
+	func( *[11,22,33], **{"k1":1,"k2":2} ) 
+
+	# 值得注意：按照这个方式将数据传递给args和kwargs时，数据是会重新拷贝一份的（可理解为内部循环每个元素并设置到args和kwargs中）。
+	所以，在使用format字符串格式化时，可以可以这样：
+	v1 = "我是{},年龄：{}。".format("武沛齐",18)
+	v2 = "我是{name},年龄：{age}。".format(name="武沛齐",age=18)
+
+
+	v3 = "我是{},年龄：{}。".format(*["武沛齐",18])
+	v4 = "我是{name},年龄：{age}。".format(**{"name":"武沛齐","age":18})		
+读取文件中的 URL 和 标题，根据URL下载视频到本地（以标题作为文件名）。
+
+	模仿,https://aweme.snssdk.com/aweme/v1/playwm/?video_id=v0300f570000bvbmace0gvch7lo53oog&ratio=720p&line=0
+	卡特,https://aweme.snssdk.com/aweme/v1/playwm/?video_id=v0200f3e0000bv52fpn5t6p007e34q1g&ratio=720p&line=0
+	罗斯,https://aweme.snssdk.com/aweme/v1/playwm/?video_id=v0200f240000buuer5aa4tij4gv6ajqg&ratio=720p&line=0
+	# 下载视频示例
+def download(title,url)
+	import requests
+
+	res = requests.get(
+	    url=url,
+	    headers={
+		"user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36 FS"
+	    }
+	)
+	with open('title.mp4', mode='wb') as f:
+	    f.write(res.content)
+
+with open('db.csv',mode = 'r' ,encoding = 'utf-8') as f :
+	for line in f:
+		line = line.strip()
+		row_list = line.spit(',')
+		#download(row_list[0],row_list[1])
+		download(*row_list) #自动分开
+	
+
+2.函数和函数名
+	既然函数就相当于是一个变量，那么在列表等元素中是否可以把行数当做元素呢？
+	
+	def func():
+	    return 123
+
+	data_list = ["武沛齐", "func", func , func() ]
+
+	print( data_list[0] ) # 字符串"武沛齐"
+	print( data_list[1] ) # 字符串 "func"
+	print( data_list[2] ) # 函数 func
+	print( data_list[3] ) # 整数 123
+
+	res = data_list[2]()
+	print( res ) # 执行函数 func，并获取返回值；print再输出返回值。
+
+	print( data_list[2]() ) # 123
+
+
+
+
+
+
+
+
+
+
+
+
+
