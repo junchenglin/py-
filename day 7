@@ -264,12 +264,238 @@ with open('db.csv',mode = 'r' ,encoding = 'utf-8') as f :
 
 	print( data_list[2]() ) # 123
 
+	既然函数就相当于是一个变量，那么在列表等元素中是否可以把行数当做元素呢？
+
+	def func():
+	    return 123
+
+	data_list = ["武沛齐", "func", func , func() ]
+
+	print( data_list[0] ) # 字符串"武沛齐"
+	print( data_list[1] ) # 字符串 "func"
+	print( data_list[2] ) # 函数 func
+	print( data_list[3] ) # 整数 123
+
+	res = data_list[2]()
+	print( res ) # 执行函数 func，并获取返回值；print再输出返回值。
+
+	print( data_list[2]() ) # 123
+	注意：函数同时也可被哈希，所以函数名通知也可以当做 集合的元素、字典的键。
+
+	掌握这个知识之后，对后续的项目开发有很大的帮助，例如，在项目中遇到根据选择做不同操作时：
+
+	情景1，例如：要开发一个类似于微信的功能。
+
+	def send_message():
+	    """发送消息"""
+	    pass
+
+	def send_image():
+	    """发送图片"""
+	    pass
+
+	def send_emoji():
+	    """发送表情"""
+	    pass
+
+	def send_file():
+	    """发送文件"""
+	    pass
+
+	print("欢迎使用xx系统")
+	print("请选择：1.发送消息；2.发送图片；3.发送表情；4.发送文件")
+	choice = input("输入选择的序号")
+
+	if choice == "1":
+	    send_message()
+	elif choice == "2":
+	    send_image()
+	elif choice == "3":
+	    send_emoji()
+	elif choice == "4":
+	    send_file()
+	else:
+	    print("输入错误")
+	def send_message():
+	    """发送消息"""
+	    pass
+
+
+	def send_image():
+	    """发送图片"""
+	    pass
+
+
+	def send_emoji():
+	    """发送表情"""
+	    pass
+
+
+	def send_file():
+	    """发送文件"""
+	    pass
+
+	def xxx():
+	    """收藏"""
+	    pass
+
+
+	function_dict = {
+	    "1": send_message,
+	    "2": send_image,
+	    "3": send_emoji,
+	    "4": send_file,
+	    "5": xxx
+	}
+
+	print("欢迎使用xx系统")
+	print("请选择：1.发送消息；2.发送图片；3.发送表情；4.发送文件")
+	choice = input("输入选择的序号") # "1"
+
+	func = function_dict.get(choice)
+	if not func:
+	    print("输入错误")
+	else:
+	    # 执行函数
+	    func()
+
+	情景2，例如：某个特定情况，要实现发送短信、微信、邮件。
+
+	def send_msg():
+	    """发送短信"""
+	    pass
+
+	def send_email():
+	    """发送图片"""
+	    pass
+
+	def send_wechat():
+	    """发送微信"""
+
+	# 执行函数
+	send_msg()
+	send_email()
+	send_wechat()
+	def send_msg():
+	    """发送短信"""
+	    pass
+
+	def send_email():
+	    """发送图片"""
+	    pass
+
+	def send_wechat():
+	    """发送微信"""
+	    pass
+
+
+	func_list = [ send_msg, send_email, send_wechat ]
+	for item in func_list:
+	    item()
+	上述两种情景，在参数相同时才可用，如果参数不一致，会出错。所以，在项目设计时就要让程序满足这一点，如果无法满足，也可以通过其他手段时间，例如：
+
+	情景1：
+
+	def send_message(phone,content):
+	    """发送消息"""
+	    pass
+
+
+	def send_image(img_path, content):
+	    """发送图片"""
+	    pass
+
+
+	def send_emoji(emoji):
+	    """发送表情"""
+	    pass
+
+
+	def send_file(path):
+	    """发送文件"""
+	    pass
+
+
+	function_dict = {
+	    "1": [ send_message,  ['15131255089', '你好呀']],
+	    "2": [ send_image,  ['xxx/xxx/xx.png', '消息内容']],
+	    "3": [ send_emoji, ["😁"]],
+	    "4": [ send_file, ['xx.zip'] ]
+	}
+
+	print("欢迎使用xx系统")
+	print("请选择：1.发送消息；2.发送图片；3.发送表情；4.发送文件")
+	choice = input("输入选择的序号") # 1
+
+	item = function_dict.get(choice) # [ send_message,  ['15131255089', '你好呀']],
+	if not item:
+	    print("输入错误")
+	else:
+	    # 执行函数
+	    func = item[0] # send_message
+	    param_list = item[1] #  ['15131255089', '你好呀']
+
+	    func(*param_list) # send_message(*['15131255089', '你好呀'])
+	情景2：
+
+	def send_msg(mobile, content):
+	    """发送短信"""
+	    pass
+
+
+	def send_email(to_email, subject, content):
+	    """发送图片"""
+	    pass
+
+
+	def send_wechat(user_id, content):
+	    """发送微信"""
+	    pass
+
+
+	func_list = [
+	    {"name": send_msg, "params": {'mobile': "15131255089", "content": "你有新短消息"}},
+	    {"name": send_email, "params": {'to_email': "wupeiqi@live.com", "subject": "报警消息", "content": "硬盘容量不够用了"}},
+	    {"name": send_wechat, "params": {'user_id': 1, 'content': "约吗"}},
+	]
+
+	#  {"name": send_msg, "params": {'mobile': "15131255089", "content": "你有新短消息"}},
+	for item in func_list:
+	    func = item['name'] # send_msg
+	    param_dict = item['params'] # {'mobile': "15131255089", "content": "你有新短消息"}
+	    func(**param_dict) # send_msg(**{'mobile': "15131255089", "content": "你有新短消息"})
 
 
 
 
-
-
+	def send_message(phone,content):
+		pass
+	
+	def send_image(img_path,content):
+		pass
+		
+	def send_emoji(emoji) :
+		pass
+	
+	def send_file(path) :
+		pass
+		
+	function_dict = {
+		"1" : [send_message,['13660996666','你好']],
+		"2" : [send_image,['xxx/xxxx.png','内容']]
+		"3" :
+		"4":
+	
+	chioce = input("输入序号选择消息发送")
+	item = function_dict.get(choice) #获取键对应的值
+	if not item
+	
+	else :
+		func = item[0] #获取函数名 send
+		param_list = item[1] #获取消息内容列表
+		func(*param_list) #执行函数，传入实参
+		
+	
 
 
 
