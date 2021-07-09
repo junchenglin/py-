@@ -92,4 +92,226 @@
     file_object.write(data)
     file_object.close()
     
+ 
+ 1.3文件常见功能
+   #读所有
+   f = open('info.txt',mode = 'r',encodeing = 'utf-8') #或者mode = 'rb'
+   data = f.raead() #字符串类型 一个汉字三个字节 (utf-8)字符型式
+   f.close()
+   
+   #读n个字符
+   f = open('info.txt',mode = 'rb') #rb不需要encoding 
+   data = f.read(1)   #读第一个字节
+   data2 = f.read(1) #按顺序第二个字节，结果为第二个字节
+   f.close()
+   print(data,type(data)) #字节类型 
+   
+   #读一行，readline
+   f = open('info.txt',mode = 'rb')
+   v1 = f.readline() #读第一行
+   v2 = f.readline() #读第二行，关闭前都是按光标继续读
+   f.close()
+   
+   #读多行，readlines()
+   
+   #循环读大文件
+   f =open('ifo.txt', mode = 'r',encodeing = 'utf-8')
+   for line in f :
+    print(line.strip()) #print(line) 默认有换行 strip 去取两边符号
+   
+   #写
+   f = open('info.txt', mode = 'a',encodeing = 'utf-8')
+   f.write("alex")
+   f.close()
+   
+   #flush,刷到硬盘
+   f = open('info.txt',mode = 'r',encoding = 'utf-8')
+   while True
+    f.write("alex") #仅写在缓冲区，可能不会存到硬盘
+    f.flush() #保证写进
+   f.close()
+   
+   #光标移动到字节位置
+   f =open('info.txt',mode = 'r',encoding = 'utf-8') #rb r+都是移动字节 
+   f.seek(3) #3个字节一个汉字
+   f.write("吴佩其") # 你好呀 变为 你吴佩其
+   
+   注意：a模式下，永远写在尾部，不会写到光标位置
+   
+   #获取当前光标位置
+    p1 = f.tell() 字节位置
+    print(p1)
     
+ 1.4上下文管理
+  自动关闭文件,自动关闭
+  with open('info.txt',mode = 'rb') as f:
+   data = f.read()
+   print(data)
+  
+  #多文件打开
+  with open("xx.txt", mode ='rb') as f1 ,open("xxxx.txt",mode = 'rb') as f2
+   pass
+   
+2.csv格式文件
+  逗号分隔值（Comma-Separated Values，CSV，有时也称为字符分隔值，因为分隔字符也可以不是逗号），其文件以纯文本形式存储表格数据（数字和文本）。
+  对于这种格式的数据，我们需要利用open函数来读取文件并根据逗号分隔的特点来进行处理。
+   
+  股票代码,股票名称,当前价,涨跌额,涨跌幅,年初至今
+  SH601778,N晶科,6.29,+1.92,-43.94%,+43.94%
+  SH688566,吉贝尔,52.66,+6.96,+15.23%,+122.29% 
+  
+  
+ID,用户名,头像
+26044585,Hush,https://hbimg.huabanimg.com/51d46dc32abe7ac7f83b94c67bb88cacc46869954f478-aP4Q3V
+19318369,柒十一,https://hbimg.huabanimg.com/703fdb063bdc37b11033ef794f9b3a7adfa01fd21a6d1-wTFbnO
+15529690,Law344,https://hbimg.huabanimg.com/b438d8c61ed2abf50ca94e00f257ca7a223e3b364b471-xrzoQd
+  
+#下载用户头像图片  
+import os
+import requests
+with open('files/mv.csv', mode='r', encoding='utf-8') as file_object:
+    file_object.readline()
+    for line in file_object:
+        user_id, username, url = line.strip().split(',') #删掉换行符，再以，分割
+        print(username, url)
+        # 1.根据URL下载图片
+        res = requests.get(
+            url=url,
+            headers={
+                "User-Agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/87.0.4280.88 Safari/537.36"
+            }
+        )
+        # 检查images目录是否存在？不存在，则创建images目录
+        if not os.path.exists("images"):
+            # 创建images目录
+            os.makedirs("images")
+
+        # 2.将图片的内容写入到文件
+        with open("images/{}.png".format(username), mode='wb') as img_object:
+            img_object.write(res.content)
+
+3.ini格式
+  [mysqld]
+  datadir=/var/lib/mysql
+  socket=/var/lib/mysql/mysql.sock
+  log-bin=py-mysql-bin
+  character-set-server=utf8
+  collation-server=utf8_general_ci
+  log-error=/var/log/mysqld.log
+  # Disabling symbolic-links is recommended to prevent assorted security risks
+  symbolic-links=0
+
+  [mysqld_safe]
+  log-error=/var/log/mariadb/mariadb.log
+  pid-file=/var/run/mariadb/mariadb.pid
+
+  [client]
+  default-character-set=utf8
+  这种格式是可以直接使用open来出来，考虑到自己处理比较麻烦，所以Python为我们提供了更为方便的方式。
+
+  import configparser
+  config = configparser.ConfigParser()
+  config.read('files/my.ini', encoding='utf-8')
+  # config.read('/Users/wupeiqi/PycharmProjects/luffyCourse/day09/files/my.ini', encoding='utf-8')
+
+  # 1.获取所有的节点
+  """
+  result = config.sections()
+  print(result)  # ['mysqld', 'mysqld_safe', 'client']
+  """
+
+  # 2.获取节点下的键值
+  """
+  result = config.items("mysqld_safe")
+  print(result)  # [('log-error', '/var/log/mariadb/mariadb.log'), ('pid-file', '/var/run/mariadb/mariadb.pid')]
+
+  for key, value in config.items("mysqld_safe"):
+      print(key, value)
+  """
+
+  # 3.获取某个节点下的键对应的值
+  """
+  result = config.get("mysqld","collation-server")
+  print(result)
+  """
+
+  # 4.其他
+  # 4.1 是否存在节点
+  # v1 = config.has_section("client")
+  # print(v1)
+
+  # 4.2 添加一个节点
+  # config.add_section("group")
+  # config.set('group','name','wupeiqi')
+  # config.set('client','name','wupeiqi')
+  # config.write(open('files/new.ini', mode='w', encoding='utf-8'))
+
+  # 4.3 删除
+  # config.remove_section('client')
+  # config.remove_option("mysqld", "datadir")
+  # config.write(open('files/new.ini', mode='w', encoding='utf-8'))
+ 
+ 读取所有节点
+  import configparser
+  config = configparser.ConfigParser()
+  config.read('/Users/wupeiqi/PycharmProjects/luffyCourse/day09/files/my.conf', encoding='utf-8')
+  # config.read('my.conf', encoding='utf-8')
+  ret = config.sections()
+  print(ret) 
+
+  >>输出
+  ['mysqld', 'mysqld_safe', 'client']
+  读取节点下的键值
+
+  import configparser
+
+  config = configparser.ConfigParser()
+  config.read('/Users/wupeiqi/PycharmProjects/luffyCourse/day09/files/my.conf', encoding='utf-8')
+  # config.read('my.conf', encoding='utf-8')
+  item_list = config.items("mysqld_safe")
+  print(item_list) 
+
+  >>输出
+  [('log-error', '/var/log/mariadb/mariadb.log'), ('pid-file', '/var/run/mariadb/mariadb.pid')]
+  读取节点下值（根据 节点+键 ）
+
+  import configparser
+
+  config = configparser.ConfigParser()
+  config.read('/Users/wupeiqi/PycharmProjects/luffyCourse/day09/files/my.conf', encoding='utf-8')
+
+  value = config.get('mysqld', 'log-bin')
+  print(value)
+
+  >>输出
+  py-mysql-bin
+  检查、删除、添加节点
+
+  import configparser
+
+  config = configparser.ConfigParser()
+  config.read('/Users/wupeiqi/PycharmProjects/luffyCourse/day09/files/my.conf', encoding='utf-8')
+  # config.read('my.conf', encoding='utf-8')
+
+
+  # 检查
+  has_sec = config.has_section('mysqld')
+  print(has_sec)
+
+  # 添加节点
+  config.add_section("SEC_1")
+  # 节点中设置键值
+  config.set('SEC_1', 'k10', "123")
+  config.set('SEC_1', 'name', "哈哈哈哈哈")
+
+  config.add_section("SEC_2")
+  config.set('SEC_2', 'k10', "123")
+  # 内容写入新文件
+  config.write(open('/Users/wupeiqi/PycharmProjects/luffyCourse/day09/files/xxoo.conf', 'w'))
+
+
+  # 删除节点
+  config.remove_section("SEC_2")
+  # 删除节点中的键值
+  config.remove_option('SEC_1', 'k10')
+  config.write(open('/Users/wupeiqi/PycharmProjects/luffyCourse/day09/files/new.conf', 'w'))
