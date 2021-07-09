@@ -20,6 +20,301 @@
   
   def func():
     print(111)
-    yield 1
+    yield 1  #next执行后遇到 yield后停止执行
+    print(222)
+    yield 666 
+    print(789)
+   
+   #执行生成器函数时，函数体默认不会被执行；返回是一个生成器对象
+   v1 = func()  #错误
+   print(v1)
+   
+   #next里面放生成器对象，进入生成器函数并执行其中代码
+   next(v1) #111
+   
+   #从上次的位置继续执行
+   next(v1) #666
+   
+   #基于for循环执行生成器
+   data = func()
+   for item in data :
+    print(item)
     
+   #生成300w个随机4位数
+   
+   import random
+   
+   def gen_random_num(max_count):
+    conter = 0
+    while counter < max_count :
+      yield random.randint(1000,9999) #返回值
+       counter += 1
+    data_lis = gen_random_num(3000000)
+    
+ 3.内置函数
+     第1组（5个）
+  - abs，绝对值
+
+    ```python
+    v = abs(-10)
+    ```
+
+  - pow，指数
+
+    ```python
+    v1 = pow(2,5) # 2的5次方  2**5
+    print(v1)
+    ```
+
+  - sum，求和
+
+    ```python
+    v1 = sum([-11, 22, 33, 44, 55]) # 可以被迭代-for循环
+    print(v1)
+    ```
+
+  - divmod，求商和余数
+
+    ```
+    v1, v2 = divmod(9, 2)
+    print(v1, v2)
+    ```
+
+  - round，小数点后n位（四舍五入）
+
+    ```python
+    v1 = round(4.11786, 2)
+    print(v1) # 4.12
+    ```
+
+- 第2组：（4个）
+
+  - min，最小值
+
+    ```python
+    v1 = min(11, 2, 3, 4, 5, 56)
+    print(v1) # 2
+    ```
+
+    ```
+    v2 = min([11, 22, 33, 44, 55]) # 迭代的类型（for循环）
+    print(v2)
+    ```
+
+    ```python
+    v3 = min([-11, 2, 33, 44, 55], key=lambda x: abs(x))
+    print(v3) # 2
+    ```
+
+  - max，最大值
+
+    ```python
+    v1 = max(11, 2, 3, 4, 5, 56)
+    print(v1)
+    
+    v2 = max([11, 22, 33, 44, 55])
+    print(v2)
+    ```
+
+    ```python
+    v3 = max([-11, 22, 33, 44, 55], key=lambda x: x * 10)
+    print(v3) # 55
+    ```
+
+  - all，是否全部为True
+
+    ```python
+    v1 = all(   [11,22,44,""]   ) # False
+    ```
+
+  - any，是否存在True
+
+    ```python
+    v2 = any([11,22,44,""]) # True
+    ```
+ 第3组（3个）
+
+  - bin，十进制转二进制
+  - oct，十进制转八进制
+  - hex，十进制转十六进制
+
+- 第4组（2个）
+
+  - ord，获取字符对应的unicode码点（十进制）
+
+    ```
+    v1 = ord("武")
+    print(v1, hex(v1))
+    ```
+
+  - chr，根据码点（十进制）获取对应字符
+
+    ```python
+    v1 = chr(27494)
+    print(v1)
+    ```
+
+- 第5组（9个）
+
+  - int
+
+  - foat
+
+  - str，unicode编码
+
+  - bytes，utf-8、gbk编码
+
+    ```python
+    v1 = "武沛齐"  # str类型
+    
+    v2 = v1.encode('utf-8')  # bytes类型
+    
+    v3 = bytes(v1,encoding="utf-8") # bytes类型
+    ```
+
+  - bool
+
+  - list
+
+  - dict
+
+  - tuple
+
+  - set
+
+- 第6组（13个）
+
+  - len
+
+  - print
+
+  - input
+
+  - open
+
+  - type，获取数据类型
+
+    ```python
+    v1 = "123"
+    
+    if type(v1) == str:
+        pass
+    else:
+        pass
+    ```
+
+  - range 
+
+    ```python
+    range(10)
+    ```
+
+  - enumerate #循环输出列表数据 维护数值
+
+    ```python
+    v1 = ["武沛齐", "alex", 'root']
+    
+    for num, value in enumerate(v1, 1): #序号从1开始  1 吴佩其
+        print(num, value)
+    ```
+
+  - id
+
+  - hash
+
+    ```python
+    v1 = hash("武沛齐")
+    ```
+
+  - help，帮助信息
+
+    - pycharm，不用
+    - 终端，使用
+
+  - zip
+
+    ```python
+    v1 = [11, 22, 33, 44, 55, 66]
+    v2 = [55, 66, 77, 88]
+    v3 = [10, 20, 30, 40, 50]
+        
+    result = zip(v1, v2, v3)
+    for item in result:
+        print(item)
+    ```
+    [11,55,10]
+    [22,66,20]
+    
+
+  - callable，是否可执行，后面是否可以加括号。
+
+    ```
+    v1 = "武沛齐"
+    v2 = lambda x: x
+    def v3():
+        pass
+    
+    
+    print( callable(v1) ) # False
+    print(callable(v2))
+    print(callable(v3))
+    ```
+
+  - sorted，排序
+
+    ```python
+    v1 = sorted([11,22,33,44,55])
+    ```
+
+    
+
+    ```python
+    info = {
+        "wupeiqi": {
+            'id': 10,
+            'age': 119
+        },
+        "root": {
+            'id': 20,
+            'age': 29
+        },
+        "seven": {
+            'id': 9,
+            'age': 9
+        },
+        "admin": {
+            'id': 11,
+            'age': 139
+        },
+    }
+    
+    result = sorted(info.items(), key=lambda x: x[1]['id'])
+    print(result)
+    ```
+
+    ```python
+    data_list = [
+        '1-5 编译器和解释器.mp4',
+        '1-17 今日作业.mp4',
+        '1-9 Python解释器种类.mp4',
+        '1-16 今日总结.mp4',
+        '1-2 课堂笔记的创建.mp4',
+        '1-15 Pycharm使用和破解（win系统）.mp4',
+        '1-12 python解释器的安装（mac系统）.mp4',
+        '1-13 python解释器的安装（win系统）.mp4',
+        '1-8 Python介绍.mp4', '1-7 编程语言的分类.mp4',
+        '1-3 常见计算机基本概念.mp4',
+        '1-14 Pycharm使用和破解（mac系统）.mp4',
+        '1-10 CPython解释器版本.mp4',
+        '1-1 今日概要.mp4',
+        '1-6 学习编程本质上的三件事.mp4',
+        '1-18 作业答案和讲解.mp4',
+        '1-4 编程语言.mp4',
+        '1-11 环境搭建说明.mp4'
+    ]
+    result = sorted(data_list, key=lambda x: int(x.split(' ')[0].split("-")[-1]) )
+    print(result)
+    ```
+    
+
    
