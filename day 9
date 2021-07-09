@@ -1,0 +1,25 @@
+1.匿名函数(简单函数）
+  基于Lambda定义的函数格式为 ：
+  lambda x : 函数体
+  lambda x1,x2 : 函数体
+  lambda *arg,**kwarg :函数体
+  
+ 函数体只支持单行代码
+ lambda x : x+100
+ 
+ 扩展：三元运算
+ num = input("请写入内容")
+ data = "alex if "ssss" in unm else "blex"
+ 
+ func = lambda x : "da" if x > 66 else "xiao"
+ 
+ v1=func(2)
+ 
+ 2.生成器
+  函数+yield关键字创造出来的写法,记录在函数中的执行位置，下次执行next时，会从上一次的位置基础上再继续向下执行。
+  
+  def func():
+    print(111)
+    yield 1
+    
+   
