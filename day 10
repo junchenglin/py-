@@ -1,0 +1,57 @@
+1.面向对象
+  #定义类
+  class Foo(object) :
+    def func(self) :
+      print("功能")
+      
+   #实例化类的对象
+   boj =Foo()
+   
+   #执行类中的方法
+   obj.func()
+   
+ 1.1定义类
+  class Message: #单词首字母大写
+    def send_enmail(self,email,cotent): #类中方法第一个固定self
+      data = "给{}发邮件，内容是：{}".format(email,cotent)
+      print(data)
+      
+   msg_object = Messag() #实例化一个对象
+   msg_object.send_email("xxx@qq.com","你好")
+    #py3之后默认类都继承object
+    
+    #定义多个类
+  class Message: #单词首字母大写
+    def send_enmail(self,email,cotent): #类中方法第一个固定self
+      data = "给{}发邮件，内容是：{}".format(email,cotent)
+      print(data)
+      
+     def send_wechat(self,vid,content):
+      data = "给{}发微信，内容是{}".format(vid,content)
+      print(data)
+   
+   msg_object = Messag()
+   msg_object.send_email("xxx","xxx")
+   msg_object.send_wechat("xxx","xxx")
+      
+ 1.2对象和self
+  #在每个类中都可以定义个特殊的 _init_初始方法，在实例化类对象时就自动执行
+  class Message: 
+    def _init_(self,content)
+      self.data = content
+      
+    def send_enmail(self,email): 
+      data = "给{}发邮件，内容是：{}".format(email,self.data)
+      print(data)
+      
+     def send_wechat(self,vid,content):
+      data = "给{}发微信，内容是{}".format(vid)
+      print(data)  
+   
+   #
+   msg_object = Messag("你好")
+   msg_object.send_email("xxx@qq.com")
+   msg_object.send_wechat("nihao")
+   msg_object.send_wechat("xxx","xxx")
+   
+   
