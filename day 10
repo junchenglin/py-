@@ -37,8 +37,8 @@
  1.2对象和self
   #在每个类中都可以定义个特殊的 _init_初始方法，在实例化类对象时就自动执行
   class Message: 
-    def _init_(self,content)
-      self.data = content
+    def _init_(self,content) #定义类后自动执行
+      self.data = content   #content作为一个返回值
       
     def send_enmail(self,email): 
       data = "给{}发邮件，内容是：{}".format(email,self.data)
@@ -48,10 +48,118 @@
       data = "给{}发微信，内容是{}".format(vid)
       print(data)  
    
-   #
-   msg_object = Messag("你好")
-   msg_object.send_email("xxx@qq.com")
-   msg_object.send_wechat("nihao")
-   msg_object.send_wechat("xxx","xxx")
+   #调用类中的方法
+   msg_object = Messag("你好") #一个对象 
+   msg_object.send_email("xxx@qq.com") 
+   msg_object.send_wechat("alex") #给alex发微信，内容是 你好
    
+   msg_object = Messag("登陆成功") #一个对象 ,返回“登陆成功”
+   msg_object.send_email("xxx@qq.com") #发送登录成功 
+   msg_object.send_wechat("alex") #给alex发微信，内容是 登陆成功   
    
+   #self,本质上是一个参数，这个参数时python 内部提供的，本质上就是调用当前方法的那个对象
+   
+   self.name self.role self.hit_points 等等只要在在_init_()函数中,都返回到定义的对象里面
+   
+
+1.3继承,类中的方法相同，可用继承的方法，简化程序
+  class Base ：
+    def func(self):
+      print("base.func")
+      
+   class Son(Base):
+    def show(self):
+      print("son.show")
+      
+   s1 = Son()
+   s1.show()
+   s1.func() #子类可继承父类 ，但优先在自己的类中找，没有才到父类找
+   
+   s2 = Base()
+   s2.func()
+    
+    class Base :
+      def f1(self):
+        print("base.f1")
+    
+    class Foo(Base) : #继承Base
+      def f2(self) :
+        print("before")
+        self.f1()
+        print("foo.f2")
+       def f1(self) :#obj,foo类创建出来的对象
+          print("foo.f1")
+    obj = Foo()
+    obj.f1() 
+    obj.f2()
+    
+    #before
+    #foo.f1    ,优先在自己的类中找
+    #foo.f2
+    
+    class Base :
+      def f1(self):
+        print("before")
+        self.f2()
+        print("base.f1")
+        
+      def f2(self):
+        print("base.f2")
+    
+    class Foo(Base) : #继承Base
+      def f2(self) :
+        print("foo.f2")
+
+    obj = Foo()
+    obj.f1() 
+
+    
+   #before 
+    foo.f2 #obj 创建的是Foo类 即便是在父类中执行函数 仍然优先再Foo找
+    base.f1
+    
+    
+    class BaseServer :
+      def serve_forever(self,poll_interval = 0.5):
+        self._handle_request_noblock()
+        
+      def _handle_request_noblock():
+        self.process_request(requset,client_address)
+        
+      def process_request(request,client_address):
+        pass
+     
+     class TCPServer(BaseServer):
+      pass
+      
+     class ThreadingMixIn:
+      def process_requset(self,requset,client_adddress):
+        pass
+     
+     class THreadingTCPServer(ThreadingMixIn,TCPServer)
+    
+  1.4多态
+    class Email(object):
+      def send(self):
+        print("发邮件")
+        
+     class Message(object):
+      def send(self):
+        print("发短信")
+        
+     def func(arg):  #只要有send()方法即可传进来
+      v1 = arg.send()
+      print(v1)
+    
+     v1 = Email()
+     func(v1)   
+     
+     v2 =Message()
+     func(v2)
+     
+     func("666")#错误
+    
+    
+    
+    
+    
