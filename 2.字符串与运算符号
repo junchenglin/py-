@@ -89,7 +89,7 @@ print(text)
 
 
 # 在Python3.8引入
-text = f"嫂子的名字叫喵喵，今年{19 + 2=}岁"
+text = f"我的名字叫喵喵，今年{19 + 2=}岁"
 print(text)
 
 
